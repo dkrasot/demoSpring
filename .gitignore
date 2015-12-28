@@ -1,0 +1,9 @@
+# Created by https://www.gitignore.io
+
+.idea/
+.idea_modules/
+/out/
+/target/*
+*.iml
+*.ipr
+*.iws
