@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:include="template :: headTemplate">
+    <title id="pageTitle">Twitter - Main page</title>
+</head>
+<body>
+<div id="header" th:include="template :: header"></div>
+<div id="logout" th:replace="template :: logout"></div>
+
+<div sec:authorize="isAuthenticated()"> <!--hasRole('ROLE_ADMIN')-->
+    Hello there...<span sec:authentication="name">user-name</span>
+    <a th:href="@{/logout}">Logout / Sign Out</a><br/>
+</div>
+<div sec:authorize="isAnonymous()">
+    You are NOT authorized user!
+    <a th:href="@{/login}">Login / Sign In</a><br/>
+</div>
+
+<div id="content">
+
+    <h1>Welcome!</h1>
+    <a sec:authorize="isAnonymous()" th:href="@{/signup}" >Sign Up</a><br/>
+    <a th:href="@{/tweets}">Tweets</a><br/>
+
+    <h2>Exception handling</h2>
+    <ul>
+        <li>You can <a th:href="@{/simulateError}">simulate an exception</a> to see custom ErrorPage.</li>
+        <li>Link to <a th:href="@{/404}">...404...</a><br/></li>
+    </ul>
+
+</div>
+<div id="footer" th:include="template :: footer"></div>
+</body>
+</html>

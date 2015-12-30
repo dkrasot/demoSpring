@@ -1,0 +1,23 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+        >
+<head th:include="template :: headTemplate">
+    <title id="pageTitle">Twitter - Profile</title>
+</head>
+<body>
+<div id="header" th:include="template :: header"></div>
+<!--uncomment after adding AUTOLOGIN -->
+<!--<div id="logout" th:replace="template :: logout"></div>-->
+<div id="content">
+
+    <h1>Your Profile</h1>
+    Username: <span th:text="${userAccount.username}">username</span><br/>
+    <!--Name: <span th:text="${userAccount.firstName}">First</span> <span th:text="${userAccount.lastName}">Last</span><br/>-->
+    Email: <span th:text="${userAccount.email}">email</span><br/>
+
+    <br/>
+    <a th:href="@{/}">To main page</a>
+
+</div>
+<div id="footer" th:include="template :: footer"></div>
+</body>
+</html>

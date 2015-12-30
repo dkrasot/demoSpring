@@ -30,7 +30,7 @@ public class DataConfig {
     }
 
     // not used
-    @Bean
+    //@Bean
     public RmiServiceExporter rmiServiceExporter(DemoService demoService) {
         RmiServiceExporter exporter = new RmiServiceExporter();
         exporter.setService(demoService);

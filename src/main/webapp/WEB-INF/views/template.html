@@ -1,0 +1,40 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:fragment="headTemplate">
+    <title th:include=":: #pageTitle">Twitter</title>
+    <link rel="shortcut icon" th:href="@{/resources/images/favicon.ico}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/style.css}"/>
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" th:href="@{/resources/css/bootstrap.css}"/>
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" th:href="@{/resources/css/signin.css}"/>
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+<div th:fragment="header">
+    <a th:href="@{/}">
+        <img th:src="@{/resources/images/twitter_logo_wide.png}" border="0" th:width="300" th:height="100"/>
+    </a>
+</div>
+
+<!--hasAnyRole('ROLE_USER','ROLE_ADMIN')-->
+<!--isAuthenticated() isn't rendering for Anonymous user-->
+<!--isFullyAuthenticated() isn't rendering for Anonymous and Remember-me user-->
+<!--th:substituteby was deprecated - need to use th:replace-->
+<div th:fragment="logout" class="logout" sec:authorize="isAuthenticated()">
+    frag auth::
+    Logged user: <span sec:authentication="name">Bob</span> |
+    Roles: <span sec:authentication="authorities">[ROLE_USER, ROLE_ADMIN]</span> |
+    <a th:href="@{/logout}">Logout</a>
+    <br/><br/><br/>
+</div>
+
+
+<div th:fragment="footer"><br/>Copyright &copy; DKras</div>
+</body>
+</html>

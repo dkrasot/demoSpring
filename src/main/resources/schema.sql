@@ -10,17 +10,21 @@ CREATE TABLE Accounts (
 
 );
 
-CREATE TABLE Messages (
+CREATE TABLE Tweets (
   id IDENTITY,
   text VARCHAR(140) NOT NULL,
-  create_date TIMESTAMP NOT NULL
+  creationDate TIMESTAMP NOT NULL,
+  id_user INT NOT NULL,
+  FOREIGN KEY (id_user) REFERENCES Accounts(id)
 );
+
+
 
 CREATE TABLE Series (
   s_id IDENTITY,
   title VARCHAR2(100),
   is_finished NUMBER(1),--0/1 or BOOLEAN ??
-  next_episode
+  next_episode INT
 );
 
 CREATE TABLE Episodes (

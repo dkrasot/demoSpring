@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:include="template :: headTemplate">
+    <title id="pageTitle">Twitter - Login page</title>
+</head>
+<body>
+<div id="header" th:include="template :: header"></div>
+
+<div class="container" style="width: 450px;">
+    <!--was 300px-->
+
+    <p><b>Logins/passwords: admin/demo; user/demo; useradmin/demo</b></p>
+
+    <form th:action="@{/login}" method="post">
+
+        <h2 class="form-signin-heading">Login</h2>
+
+        <div class="errors" th:if="${loginError}">
+            <p>You've entered the wrong username or password. Please try again.</p>
+        </div>
+        <br/>
+
+        <label for="username">Username</label>:
+        <input type="text" id="username" name="username" autofocus="autofocus"/><br/>
+        <label for="password">Password</label>:
+        <input type="password" id="password" name="password"/> <br/>
+
+        <br/>
+        <input class="btn btn-lg btn-primary btn-block" type="submit" value="Log In"/>
+
+    </form>
+
+    <br/>
+    <p><a th:href="@{/}">Back to home page</a></p>
+
+</div>
+
+<div id="footer" th:include="template :: footer"></div>
+</body>
+</html>
