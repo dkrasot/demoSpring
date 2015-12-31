@@ -16,7 +16,7 @@ public class JdbcTweetRepository implements TweetRepository {
     private JdbcOperations jdbc;
     private final String SELECT_COUNT_TWEETS = "SELECT COUNT(*) FROM Tweets";
     private final String SELECT_TWEET_BY_ID = "SELECT id, text, creationDate, id_user FROM Tweets WHERE id = ?";
-    private final String SELECT_TWEETS = "SELECT id, message, creationDate, id_user FROM Tweets ORDER BY creationDate DESC";
+    private final String SELECT_TWEETS = "SELECT id, text, creationDate, id_user FROM Tweets ORDER BY creationDate DESC";
     private final String SELECT_TWEETS_LIMIT = SELECT_TWEETS+" LIMIT ?";
     private final String INSERT_TWEET = "INSERT INTO Tweets (text, creationDate, id_user) VALUES (?,?,?)";
     private final String DELETE_TWEET = "DELETE FROM Tweets WHERE id = ?";

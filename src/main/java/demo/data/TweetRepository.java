@@ -15,17 +15,17 @@ public interface TweetRepository {
 
     long count();
 
-    @CachePut(value = "myCache", key = "#result", unless = "#result == null") //#result.id IS NULL
+    //@CachePut(value = "myCache", key = "#result", unless = "#result == null") //#result.id IS NULL
     Tweet save(Tweet tweet);
 
-    @CacheEvict("myCache")
+    //@CacheEvict("myCache")
     void delete(long tweetId);
 
-    @Secured("ROLE_USER") // = @PreAuthorize("hasRole('ROLE_USER')")
+    //@Secured("ROLE_USER") // = @PreAuthorize("hasRole('ROLE_USER')")
     // cache disabled IF text contains NoCache && ID <= 10
-    @Cacheable(value = "myCache",
-            unless = "#result.message.contains('NoCache')",
-            condition = "#id > 10")
+//    @Cacheable(value = "myCache",
+//            unless = "#result.message.contains('NoCache')",
+//            condition = "#id > 10")
     Tweet findById(long id);
 
     List<Tweet> findRecentTweets();

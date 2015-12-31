@@ -13,7 +13,7 @@
         <form method="POST" name="tweetForm">
             <!--<input type="hidden" name="latitude" />-->
             <!--<input type="hidden" name="longitude" />-->
-            <textarea name="message" cols="80" rows="5"></textarea><br/>
+            <textarea name="text" cols="80" rows="5"></textarea><br/>
             <input type="submit" value="Add" />
         </form>
     </div>
@@ -23,7 +23,7 @@
         <ul class="tweetList">
             <li th:each="tweet : ${tweetList}"
                 th:id="'tweet_' + ${tweet.id}">
-                <div class="tweetMessage" th:text="${tweet.message}">Tweet message</div>
+                <div class="tweetMessage" th:text="${tweet.text}">Tweet message</div>
                 <div>
                     <a th:href="@{/tweets/{tweetId}(tweetId=${tweet.id})}">
                         <span class="tweetTime" th:text="${tweet.creationDate}">Tweet timestamp</span>

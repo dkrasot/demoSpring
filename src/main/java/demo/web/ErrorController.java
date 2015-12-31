@@ -17,6 +17,7 @@ public class ErrorController {
         errorMessage.append("<ul>");
         while (throwable != null) {
             errorMessage.append("<li>").append(escapeTags(throwable.getMessage())).append("</li>");
+            throwable = throwable.getCause();
         }
         errorMessage.append("</ul>");
         model.addAttribute("errorMessage", errorMessage.toString());
@@ -31,7 +32,7 @@ public class ErrorController {
     }
 
     @RequestMapping("/simulateError")
-    public String simulateError() {
+    public void simulateError() {
         throw new RuntimeException("This is a simulated error message");
     }
 }

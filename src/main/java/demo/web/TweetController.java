@@ -7,6 +7,8 @@ import demo.entity.TweetForm;
 import demo.validation.DuplicateTweetException;
 import demo.validation.TweetNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
+import java.security.Principal;
 import java.util.Date;
 import java.util.List;
 
@@ -49,11 +52,17 @@ public class TweetController {
 
     @RequestMapping(method = RequestMethod.POST)
     public String saveTweet(@Valid TweetForm form, Model model) {
+        //Principal to method params -> principal.getName()
+        //User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String name = SecurityContextHolder.getContext().getAuthentication().getName();
+        System.out.println("NAME FROM SECURITY CONTEXT IS >"+ name+"<");
+        Long userId = accountRepository.findByUsername(name).getId();
+
         try {
             tweetRepository.save(
                     //TODO get Username from principal
                     //new Tweet( null, form.getText(), new Date(), accountRepository.getUserIdByUsername("getUsernameFromLogin")));
-                    new Tweet( null, form.getText(), new Date(), null));
+                    new Tweet( null, form.getText(), new Date(), userId));
             return "redirect:/tweets";
         } catch (DuplicateTweetException e) {
             return "error/duplicate";

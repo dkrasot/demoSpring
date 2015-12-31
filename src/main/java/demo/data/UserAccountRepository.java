@@ -10,13 +10,13 @@ public interface UserAccountRepository {
 
     long count();
 
-    @CachePut(value = "myCache", key = "#result.id") // maybe #result.username?? unique username/email
+    //@CachePut(value = "myCache", key = "#result.id") // maybe #result.username?? unique username/email
     UserAccount save(UserAccount profile);
 
-    @Cacheable(value = "myCache", key = "#result.username")
+    //@Cacheable(value = "myCache", key = "#result.username")
     UserAccount findByUsername(String username);
 
-    @Cacheable(value = "myCache", key = "#result.id")
+    //@Cacheable(value = "myCache", key = "#result.id")
     UserAccount findById(long id);
 
     List<UserAccount> findAll();

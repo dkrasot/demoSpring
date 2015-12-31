@@ -12,7 +12,9 @@ import java.util.regex.Pattern;
 @Import({DataConfig.class})
 @ComponentScan(
         basePackages = {"demo"},
-        excludeFilters = {@ComponentScan.Filter(type = FilterType.CUSTOM, value = RootConfig.WebPackage.class)})
+        excludeFilters = {
+                @ComponentScan.Filter(type = FilterType.CUSTOM, value = RootConfig.WebPackage.class)
+        })
 public class RootConfig {
     public static class WebPackage extends RegexPatternTypeFilter {
         public WebPackage() {

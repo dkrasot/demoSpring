@@ -35,9 +35,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.formLogin().loginPage("/login").defaultSuccessUrl("/").failureUrl("/login-error")
-                .usernameParameter("username").passwordParameter("password").permitAll();
-        http.logout().permitAll().logoutUrl("/logout").invalidateHttpSession(true);
         http.csrf().disable();
         http.authorizeRequests()
                 .antMatchers("/", "/signup", "/profile/**").permitAll()
@@ -45,5 +42,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.GET, "/tweets").permitAll()
                 .antMatchers("/admin/**").hasRole("ADMIN")
                 .anyRequest().authenticated();
+        http.formLogin()
+                .loginPage("/login")
+                .defaultSuccessUrl("/")
+                .failureUrl("/login-error")
+                .usernameParameter("username")
+                .passwordParameter("password").permitAll();
+        http.logout()
+                .permitAll()
+                .logoutUrl("/logout")
+                .invalidateHttpSession(true);
     }
 }
