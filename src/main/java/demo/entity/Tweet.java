@@ -14,17 +14,17 @@ public class Tweet {
     private final Long id;
     private final String text;
     private final Date creationDate;
-    private final Long userId;
+    private final String username;
 
-    public Tweet(String text, Date creationDate, Long userId) {
-        this(null, text, creationDate, userId);
+    public Tweet(String text, Date creationDate, String username) {
+        this(null, text, creationDate, username);
     }
 
-    public Tweet(Long id, String text, Date creationDate, Long userId) {
+    public Tweet(Long id, String text, Date creationDate, String username) {
         this.id = id;
         this.text = text;
         this.creationDate = creationDate;
-        this.userId = userId;
+        this.username = username;
     }
 
     public Long getId() {
@@ -39,8 +39,8 @@ public class Tweet {
         return creationDate;
     }
 
-    public Long getUserId() {
-        return userId;
+    public String getUsername() {
+        return username;
     }
 
     @Override

@@ -27,6 +27,7 @@
                 <div>
                     <a th:href="@{/tweets/{tweetId}(tweetId=${tweet.id})}">
                         <span class="tweetTime" th:text="${tweet.creationDate}">Tweet timestamp</span>
+                        by <span class="tweetAuthor" th:text="${tweet.username}">Tweet author</span>
                     </a>
                     <!--<span class="tweetLocation" th:text="'{' + ${tweet.latitude} + ', ' + ${tweet.longitude} + ')'">lat, long</span>-->
                 </div>

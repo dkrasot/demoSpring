@@ -15,10 +15,11 @@ public class JdbcTweetRepository implements TweetRepository {
 
     private JdbcOperations jdbc;
     private final String SELECT_COUNT_TWEETS = "SELECT COUNT(*) FROM Tweets";
-    private final String SELECT_TWEET_BY_ID = "SELECT id, text, creationDate, id_user FROM Tweets WHERE id = ?";
-    private final String SELECT_TWEETS = "SELECT id, text, creationDate, id_user FROM Tweets ORDER BY creationDate DESC";
+    private final String SELECT_TWEET_BY_ID = "SELECT id, text, creationDate, username FROM Tweets WHERE id = ?";
+    private final String SELECT_TWEETS = "SELECT id, text, creationDate, username FROM Tweets ORDER BY creationDate DESC";
+    //private final String SELECT_TWEETS_WITH_USERNAME = "SELECT t.id, t.text, t.creationDate, a.username FROM Tweets t, Accounts a WHERE t.id_user = a.id ORDER BY creationDate DESC";
     private final String SELECT_TWEETS_LIMIT = SELECT_TWEETS+" LIMIT ?";
-    private final String INSERT_TWEET = "INSERT INTO Tweets (text, creationDate, id_user) VALUES (?,?,?)";
+    private final String INSERT_TWEET = "INSERT INTO Tweets (text, creationDate, username) VALUES (?,?,?)";
     private final String DELETE_TWEET = "DELETE FROM Tweets WHERE id = ?";
 
     @Autowired
@@ -33,7 +34,7 @@ public class JdbcTweetRepository implements TweetRepository {
 
     @Override
     public Tweet save(Tweet tweet) {
-        jdbc.update(INSERT_TWEET, tweet.getText(), tweet.getCreationDate(), tweet.getUserId());
+        jdbc.update(INSERT_TWEET, tweet.getText(), tweet.getCreationDate(), tweet.getUsername());
         return tweet;
     }
 
@@ -54,7 +55,6 @@ public class JdbcTweetRepository implements TweetRepository {
     public List<Tweet> findRecentTweets() {
         return jdbc.query(SELECT_TWEETS, new TweetRowMapper());
     }
-
     @Override
     public List<Tweet> findRecentTweets(int count) {
         return jdbc.query(SELECT_TWEETS_LIMIT, new TweetRowMapper(), count);
@@ -62,7 +62,8 @@ public class JdbcTweetRepository implements TweetRepository {
 
     private static class TweetRowMapper implements RowMapper<Tweet> {
         public Tweet mapRow(ResultSet rs, int rowNum) throws SQLException {
-            return new Tweet(rs.getLong("id"), rs.getString("text"), rs.getDate("creationDate"), rs.getLong("id_user"));
+            //return new Tweet(rs.getLong("id"), rs.getString("text"), rs.getDate("creationDate"), rs.getLong("id_user"));
+            return new Tweet(rs.getLong("id"), rs.getString("text"), rs.getDate("creationDate"), rs.getString("username"));
         }
     }
 }

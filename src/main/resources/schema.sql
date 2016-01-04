@@ -14,16 +14,16 @@ CREATE TABLE Tweets (
   id IDENTITY,
   text VARCHAR(140) NOT NULL,
   creationDate TIMESTAMP NOT NULL,
-  id_user INT NOT NULL,
-  FOREIGN KEY (id_user) REFERENCES Accounts(id)
+  username VARCHAR(30) NOT NULL,
+  FOREIGN KEY (username) REFERENCES Accounts(username)
 );
 
 INSERT INTO Accounts (username, password, email) VALUES ('user','demo','user@demo.com');
 INSERT INTO Accounts (username, password, email) VALUES ('admin','demo','admin@demo.com');
 INSERT INTO Accounts (username, password, email) VALUES ('useradmin','demo','useradmin@demo.com');
-INSERT INTO Tweets (text, creationDate, id_user) VALUES ('text_msg_1','2015-12-31 11:00:00',1);
-INSERT INTO Tweets (text, creationDate, id_user) VALUES ('text_msg_2','2015-12-31 12:00:00',2);
-INSERT INTO Tweets (text, creationDate, id_user) VALUES ('text_msg_3','2015-12-31 13:00:00',3);
+INSERT INTO Tweets (text, creationDate, username) VALUES ('text_msg_USER','2015-12-31 11:00:00','user');
+INSERT INTO Tweets (text, creationDate, username) VALUES ('text_msg_ADMIN','2015-12-31 12:00:00','admin');
+INSERT INTO Tweets (text, creationDate, username) VALUES ('text_msg_USERADMIN','2015-12-31 13:00:00','useradmin');
 COMMIT;
 -- insert into Users (username, password, first_name, last_name, email)
 -- values ('user01', 'pass01', 'Dmytro', 'Krasota', 'dkras@gmail.com');
